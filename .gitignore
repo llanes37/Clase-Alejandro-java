@@ -1,0 +1,14 @@
+# Java build artifacts
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# JVM crash logs
+hs_err_pid*
+
+# IDE (optional)
+.idea/
+.vscode/
