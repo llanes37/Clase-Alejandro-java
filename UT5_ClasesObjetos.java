@@ -104,6 +104,48 @@ class Persona {
     public void mostrarInformacion() {
         System.out.println("Nombre: " + nombre + " | Edad: " + edad);
     }
+
+    // =====================================================================
+    // ENTRENAMIENTO DE METODOS (PLANTILLAS PARA COMPLETAR EN CLASE)
+    // =====================================================================
+
+    // Metodo: actualizarEdad(int nuevaEdad)
+    // Entrenar: validacion con if/else para aceptar solo edades > 0.
+    public void actualizarEdad(int nuevaEdad) {
+        // TODO: validar nuevaEdad y actualizar edad si es correcta.
+    }
+
+    // Metodo: esMayorDeEdad()
+    // Entrenar: devolver true/false usando una condicion.
+    public boolean esMayorDeEdad() {
+        // TODO: devolver true si edad >= 18, si no false.
+        return false;
+    }
+
+    // Metodo: generarFicha()
+    // Entrenar: construir y devolver un String con datos del objeto.
+    public String generarFicha() {
+        // TODO: devolver un texto con nombre y edad.
+        return "";
+    }
+
+    // Metodo: saludar()
+    // Entrenar: sobrecarga de metodos (version sin parametros).
+    public void saludar() {
+        // TODO: mostrar un saludo basico en consola.
+    }
+
+    // Metodo: saludar(String saludoPersonalizado)
+    // Entrenar: sobrecarga de metodos (version con parametro).
+    public void saludar(String saludoPersonalizado) {
+        // TODO: mostrar el saludo recibido por parametro.
+    }
+
+    // Metodo: cambiarNombre(String nuevoNombre)
+    // Entrenar: uso de this y validacion basica de texto.
+    public void cambiarNombre(String nuevoNombre) {
+        // TODO: validar que no sea vacio y actualizar this.nombre.
+    }
 }
 
 /*
@@ -116,3 +158,4 @@ class Persona {
  * 
  * 🚀 **¡Explora y experimenta con el código!**
  */
+
