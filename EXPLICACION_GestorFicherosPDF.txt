@@ -1,0 +1,471 @@
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                     📚 GUÍA COMPLETA: GESTOR DE FICHEROS EN JAVA                     ║
+║                        Explicación paso a paso de la clase                           ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+
+🎯 OBJETIVOS DE LA CLASE
+═══════════════════════════════════════════════════════════════════════════════════════
+✅ Crear archivos de texto
+✅ Escribir contenido en archivos (sobrescribir o añadir)
+✅ Leer archivos línea por línea
+✅ Obtener información de archivos
+✅ Listar todos los archivos creados
+✅ Menú interactivo para todas las funcionalidades
+
+
+📌 PASO 1: IMPORTACIONES NECESARIAS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+import java.io.File;                  // Trabajar con archivos y carpetas
+import java.io.FileWriter;            // Escribir contenido en archivos
+import java.io.IOException;           // Manejar errores de entrada/salida
+import java.io.FileReader;            // Leer contenido de archivos
+import java.io.BufferedReader;        // Leer línea por línea (más eficiente)
+import java.util.Scanner;             // Leer entrada del usuario desde teclado
+import java.text.SimpleDateFormat;    // Formatear fechas (ej: 01/01/2025)
+import java.util.Date;                // Obtener fecha y hora actual
+
+💡 ¿Por qué importamos cada una?
+   • File: Nos permite crear, eliminar y obtener información de archivos
+   • FileWriter: Escribe texto en archivos
+   • IOException: Captura errores relacionados con archivos
+   • FileReader: Lee archivos desde el principio
+   • BufferedReader: Lee líneas completas (mucho más práctico)
+   • Scanner: Lee entrada del usuario
+   • SimpleDateFormat y Date: Para mostrar fechas legibles
+
+
+📌 PASO 2: VARIABLES GLOBALES
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static final String CARPETA = "DocumentosPDF/";
+• CARPETA: Ruta donde guardaremos todos los archivos
+• final: No se puede cambiar después (constante)
+• static: Pertenece a la clase, no a los objetos
+
+private static Scanner sc = new Scanner(System.in);
+• Scanner compartido por toda la clase
+• System.in: Lee desde el teclado
+
+
+📌 PASO 3: MÉTODO MAIN - EL PUNTO DE ENTRADA
+═══════════════════════════════════════════════════════════════════════════════════════
+
+public static void main(String[] args) {
+    crearCarpeta();           // 1️⃣ Crea la carpeta si no existe
+    
+    int opcion;
+    do {
+        mostrarMenuPrincipal();     // 2️⃣ Muestra las opciones
+        opcion = obtenerOpcion();   // 3️⃣ Lee la opción del usuario
+        procesarOpcion(opcion);     // 4️⃣ Ejecuta la opción elegida
+    } while (opcion != 0);          // 5️⃣ Repite hasta que salga
+    
+    sc.close();                     // 6️⃣ Cierra Scanner al terminar
+}
+
+🔄 Flujo del programa:
+   1. El programa crea la carpeta "DocumentosPDF/"
+   2. Muestra un menú con 6 opciones
+   3. Lee la opción del usuario
+   4. Ejecuta la función correspondiente
+   5. Repite el menú hasta que el usuario elige "0. Salir"
+
+
+📌 PASO 4: MENÚ PRINCIPAL
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void mostrarMenuPrincipal() {
+    // Mostramos opciones visualmente claras
+    System.out.println("  1️⃣  Crear nuevo archivo de texto");
+    System.out.println("  2️⃣  Escribir contenido en un archivo");
+    System.out.println("  3️⃣  Leer contenido de un archivo");
+    // ... etc
+}
+
+private static int obtenerOpcion() {
+    try {
+        int opcion = sc.nextInt();
+        sc.nextLine(); // 🧹 LiMPIA EL BUFFER (¡IMPORTANTE!)
+        return opcion;
+    } catch (java.util.InputMismatchException e) {
+        sc.nextLine(); // Limpia si hay error
+        System.out.println("❌ Debes ingresar un número válido.");
+        return -1;
+    }
+}
+
+⚠️ ¿Por qué limpiamos el buffer con sc.nextLine()?
+   Cuando usas nextInt(), solo lee el número pero deja el ENTER en la cola.
+   El siguiente nextLine() leería un string vacío sin esto.
+
+
+📌 PASO 5: PROCESAR LA OPCIÓN (SWITCH)
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void procesarOpcion(int opcion) {
+    switch (opcion) {
+        case 1: menuCrearArchivo();      break;
+        case 2: menuEscribir();          break;
+        case 3: menuLeer();              break;
+        case 4: menuComprobarArchivo();  break;
+        case 5: listarArchivos();        break;
+        case 0: /* Salir */              break;
+        default: System.out.println("⚠️ Opción no válida.");
+    }
+}
+
+🎛️ El switch dirige cada opción a su función correspondiente.
+
+
+📌 PASO 6: CREAR CARPETA
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void crearCarpeta() {
+    File carpeta = new File(CARPETA);          // 1. Creamos objeto File
+    if (!carpeta.exists()) {                   // 2. ¿Ya existe?
+        if (carpeta.mkdir()) {                 // 3. Intenta crear
+            System.out.println("✅ Carpeta creada");
+        }
+    }
+}
+
+📖 TEORÍA:
+   • new File(ruta): Crea un objeto que representa el archivo/carpeta
+   • exists(): Devuelve true si ya existe
+   • mkdir(): Crea la carpeta (solo si no existe)
+
+
+📌 PASO 7: CREAR UN ARCHIVO NUEVO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void crearArchivo(String nombre) {
+    try {
+        String rutaCompleta = CARPETA + nombre + ".txt";  // DocumentosPDF/archivo.txt
+        File archivo = new File(rutaCompleta);
+        
+        if (archivo.createNewFile()) {
+            System.out.println("✅ Archivo creado");
+        } else {
+            System.out.println("ℹ️ El archivo ya existe");
+        }
+    } catch (IOException e) {
+        System.out.println("❌ Error: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+📖 TEORÍA:
+   • createNewFile(): Crea el archivo físicamente en disco
+   • Devuelve true si se creó, false si ya existía
+   • Necesita try-catch para manejar excepciones IOException
+
+
+📌 PASO 8: ESCRIBIR EN UN ARCHIVO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void escribirEnArchivo(String nombre, boolean append) {
+    try {
+        String rutaCompleta = CARPETA + nombre + ".txt";
+        FileWriter escritor = new FileWriter(rutaCompleta, append);
+        // append = true  → AÑADE al final
+        // append = false → SOBRESCRIBE todo
+        
+        if (!append) {
+            // Si es nuevo contenido, añadimos una cabecera con fecha
+            String fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+            escritor.write("=== Documento creado: " + fecha + " ===\n\n");
+        }
+        
+        // Leemos líneas del usuario hasta que escriba "FIN"
+        String linea;
+        while (true) {
+            linea = sc.nextLine();
+            if (linea.equalsIgnoreCase("FIN")) {
+                break;
+            }
+            escritor.write(linea + "\n");
+        }
+        
+        escritor.close();  // ¡OBLIGATORIO CERRAR!
+        System.out.println("✅ Contenido guardado");
+        
+    } catch (IOException e) {
+        System.out.println("❌ Error: " + e.getMessage());
+    }
+}
+
+📖 TEORÍA - FileWriter:
+   • new FileWriter(ruta, append):
+     - append = true  → Abre en modo ADICIÓN
+     - append = false → Abre en modo SOBRESCRITURA
+   • write(string): Escribe texto
+   • close(): CIERRA el archivo (importante para liberar recursos)
+
+⚠️ ¡MUY IMPORTANTE!
+   Siempre debes cerrar el FileWriter cuando termines:
+   • Si no cierras, el contenido podría no guardarse
+   • No liberas memoria
+   • La contraseña se queda "abierta" para otros programas
+
+
+📌 PASO 9: LEER UN ARCHIVO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void leerArchivo(String nombre) {
+    try {
+        String rutaCompleta = CARPETA + nombre + ".txt";
+        
+        FileReader lector = new FileReader(rutaCompleta);           // 1. Abre archivo
+        BufferedReader buffer = new BufferedReader(lector);         // 2. Para leer líneas
+        
+        System.out.println("📖 CONTENIDO:");
+        String linea;
+        int numeroLinea = 1;
+        
+        while ((linea = buffer.readLine()) != null) {   // Mientras haya líneas
+            System.out.println(numeroLinea + " | " + linea);
+            numeroLinea++;
+        }
+        
+        buffer.close();   // Cierra el buffer
+        lector.close();   // Cierra el lector
+        
+    } catch (IOException e) {
+        System.out.println("❌ Error: " + e.getMessage());
+    }
+}
+
+📖 TEORÍA - Leer una archivo:
+   • FileReader: Lee carácter por carácter (lento)
+   • BufferedReader: Lee LÍNEA por LÍNEA (mucho mejor)
+   
+   ¿Por qué usar BufferedReader?
+   - FileReader: F-i-l-e-R-e-a-d-e-r (una por una)
+   - BufferedReader: "FileReader" (toda la línea de una)
+
+   readLine():
+   - Devuelve la siguiente línea como String
+   - Devuelve NULL cuando no hay más líneas
+   - Esto permite usar: while ((linea = buffer.readLine()) != null)
+
+
+📌 PASO 10: OBTENER INFORMACIÓN DEL ARCHIVO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void comprobarInformacionArchivo(String nombre) {
+    File archivo = new File(CARPETA + nombre + ".txt");
+    
+    if (archivo.exists()) {
+        System.out.println("✅ Existe");
+        System.out.println("📏 Tamaño: " + archivo.length() + " bytes");
+        System.out.println("📍 Ruta: " + archivo.getAbsolutePath());
+        System.out.println("✏️ Lectura: " + (archivo.canRead() ? "Sí" : "No"));
+        System.out.println("📝 Escritura: " + (archivo.canWrite() ? "Sí" : "No"));
+        
+        long tiempoMs = archivo.lastModified();
+        Date fecha = new Date(tiempoMs);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        System.out.println("📅 Modificado: " + sdf.format(fecha));
+    } else {
+        System.out.println("❌ No existe");
+    }
+}
+
+📖 ÚTILES DE File:
+   • exists(): ¿Existe el archivo?
+   • length(): Tamaño en bytes
+   • getAbsolutePath(): Ruta completa
+   • canRead(): ¿Se puede leer?
+   • canWrite(): ¿Se puede escribir?
+   • lastModified(): Última modificación (en milisegundos)
+   • getName(): Solo el nombre del archivo
+   • delete(): Elimina el archivo
+
+
+📌 PASO 11: LISTAR TODOS LOS ARCHIVOS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+private static void listarArchivos() {
+    File carpeta = new File(CARPETA);
+    File[] archivos = carpeta.listFiles();  // Array con todos los archivos
+    
+    if (archivos == null || archivos.length == 0) {
+        System.out.println("📭 La carpeta está vacía");
+    } else {
+        int contador = 1;
+        for (File archivo : archivos) {
+            if (archivo.isFile()) {  // Solo archivos, no carpetas
+                System.out.println(contador + ". " + archivo.getName() + 
+                                 " (" + archivo.length() + " bytes)");
+                contador++;
+            }
+        }
+    }
+}
+
+📖 TEORÍA:
+   • listFiles(): Devuelve array con todos los archivos/carpetas
+   • isFile(): ¿Es un archivo? (no una carpeta)
+   • isDirectory(): ¿Es una carpeta?
+   
+   for (File archivo : archivos) {
+   • Bucle for-each para recorrer el array
+   • Cada iteración, 'archivo' es el siguiente elemento
+
+
+═══════════════════════════════════════════════════════════════════════════════════════
+🔍 RESUMEN DE EXCEPCIONES
+═══════════════════════════════════════════════════════════════════════════════════════
+
+try {
+    // Código que PODRÍA fallar
+} catch (IOException e) {
+    // Si algo falla, ejecutamos esto
+    System.out.println("❌ Error: " + e.getMessage());
+    e.printStackTrace();  // Muestra dónde falló exactamente
+}
+
+❌ Excepciones comunes:
+   • FileNotFoundException: El archivo no existe
+   • IOException: Error de lectura/escritura
+   • InputMismatchException: Usuario escribió algo que no es número
+
+
+═══════════════════════════════════════════════════════════════════════════════════════
+🎯 DIAGRAMA DE FLUJO DEL PROGRAMA
+═══════════════════════════════════════════════════════════════════════════════════════
+
+                          INICIO
+                            ↓
+                    Crear carpeta
+                            ↓
+                      ┌─ MENÚ PRINCIPAL
+                      │     ↓
+                      └─ ¿Qué opción?
+                            ↓
+           ┌────────────────┼────────────────┐
+           ↓                ↓                ↓
+        Opción 1         Opción 2         Opción 3
+       Crear archivo    Escribir en      Leer archivo
+                        archivo
+                            ↓
+                    ¿Sobrescribir o
+                       añadir?
+                            ↓
+                    Leer contenido
+                       del usuario
+                            ↓
+                        Guardar
+                            ↓
+                        ¿Salir?
+                        ↙     ↖
+                      NO      SÍ
+                      ↓       ↓
+                    MENÚ    FIN
+
+
+═══════════════════════════════════════════════════════════════════════════════════════
+💡 EJEMPLOS DE USO
+═══════════════════════════════════════════════════════════════════════════════════════
+
+Ejemplo 1: Crear y escribir un archivo
+─────────────────────────────────────────
+1. Ejecutar: java GestorFicherosPDF
+2. Opción: 1 (Crear)
+3. Nombre: "apuntes"
+4. Se crea: DocumentosPDF/apuntes.txt
+5. Opción: 2 (Escribir)
+6. Nombre: "apuntes"
+7. Modo: 1 (Sobrescribir)
+8. Contenido: 
+   Java es un lenguaje de programación
+   Fue creado en 1995 por Sun Microsystems
+   FIN
+
+Resultado: DocumentosPDF/apuntes.txt contiene el texto
+
+
+Ejemplo 2: Leer el archivo
+─────────────────────────────────────────
+1. Opción: 3 (Leer)
+2. Nombre: "apuntes"
+3. Se muestra:
+   📖 CONTENIDO:
+   1 | === Documento creado: 20/02/2025 14:30:45 ===
+   2 | 
+   3 | Java es un lenguaje de programación
+   4 | Fue creado en 1995 por Sun Microsystems
+
+
+═══════════════════════════════════════════════════════════════════════════════════════
+🛠️ CÓMO EJECUTAR EL PROGRAMA
+═══════════════════════════════════════════════════════════════════════════════════════
+
+Opción 1: En VS Code
+─────────────────────────────────────────
+1. Abre GestorFicherosPDF.java
+2. Haz clic en "Run" (play button arriba a la derecha)
+3. O usa el terminal: javac GestorFicherosPDF.java
+                      java GestorFicherosPDF
+
+Opción 2: En terminal PowerShell
+─────────────────────────────────────────
+> cd "C:\Users\algom\OneDrive\Escritorio\Clase-Alejandro-java"
+> javac GestorFicherosPDF.java
+> java GestorFicherosPDF
+
+
+═══════════════════════════════════════════════════════════════════════════════════════
+📝 TAREAS PARA PRACTICAR
+═══════════════════════════════════════════════════════════════════════════════════════
+
+✅ TAREA 1: Añade eliminación de archivos
+   - Nueva opción en el menú: "Eliminar archivo"
+   - Usa archivo.delete()
+
+✅ TAREA 2: Contar líneas
+   - Muestra cuántas líneas tiene el archivo al leerlo
+
+✅ TAREA 3: Buscar palabras
+   - Nueva opción: Buscar una palabra en el archivo
+   - Lee el archivo y cuenta cuántas veces aparece
+
+✅ TAREA 4: Copiar archivo
+   - Nueva opción: "Copiar archivo"
+   - Lee un archivo y copia su contenido a otro
+
+✅ TAREA 5: Guardar fecha
+   - Modifica readLine() para guardar automáticamente la fecha de creación
+
+
+═══════════════════════════════════════════════════════════════════════════════════════
+🔗 CONEXIÓN CON UT12_Ficheros.java
+═══════════════════════════════════════════════════════════════════════════════════════
+
+Comparación:
+   UT12_Ficheros.java:
+   • Introducción básica
+   • Una función por cada operación
+   • Sin menú interactivo completo
+
+   GestorFicherosPDF.java (ESTA):
+   • Menú interactivo completo
+   • Manejo de errores robusto
+   • Organización profesional
+   • Más funcionalidades
+
+
+═══════════════════════════════════════════════════════════════════════════════════════
+✨ ¡FELICIDADES! Ya entiendes la clase completa
+═══════════════════════════════════════════════════════════════════════════════════════
+
+Puntos clave:
+✓ File: Crear, verificar, obtener info de archivos
+✓ FileWriter: Escribir contenido (sobrescribir o añadir)
+✓ FileReader + BufferedReader: Leer línea por línea
+✓ Try-catch: Manejar excepciones
+✓ Menús interactivos con bucles do-while
+✓ Validación de entrada del usuario
+

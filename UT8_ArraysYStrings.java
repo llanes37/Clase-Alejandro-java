@@ -27,12 +27,23 @@
              sc.nextLine(); // Limpiar buffer
  
              switch (opcion) {
-                 case 1 -> arrayDePalabras(sc);
-                 case 2 -> buscarPalabra(sc);
-                 case 3 -> fraseASplit(sc);
-                 case 4 -> ordenarPalabras(sc);
-                 case 0 -> System.out.println("🚪 Saliendo del programa...");
-                 default -> System.out.println("❌ Opción inválida.");
+                 case 1:
+                     arrayDePalabras(sc);
+                     break;
+                 case 2:
+                     buscarPalabra(sc);
+                     break;
+                 case 3:
+                     fraseASplit(sc);
+                     break;
+                 case 4:
+                     ordenarPalabras(sc);
+                     break;
+                 case 0:
+                     System.out.println("🚪 Saliendo del programa...");
+                     break;
+                 default:
+                     System.out.println("❌ Opción inválida.");
              }
          } while (opcion != 0);
  
@@ -48,16 +59,12 @@
           */
          System.out.println("\n📌 EJERCICIO 1: Array de palabras");
  
-         String[] palabras = new String[3];
- 
+        String[] clases = {"Sergio", "Alvaro", "Oleg"};
          // ? Pedimos al usuario ingresar palabras
-         for (int i = 0; i < palabras.length; i++) {
-             System.out.print("🔤 Introduce la palabra " + (i + 1) + ": ");
-             palabras[i] = sc.nextLine();
+         for (int i = 0; i < clases.length; i++) {
+             System.out.println("👋 " + clases[i] + " ha salido de clase.");
          }
- 
-         // ? Mostramos el contenido del array
-         System.out.println("🧾 Palabras ingresadas: " + Arrays.toString(palabras));
+
  
          // ✅ TAREA ALUMNO: modifica el array para que tenga 5 palabras y muestra solo aquellas que tengan más de 5 letras.
      }
@@ -73,14 +80,11 @@
  
          String[] animales = {"perro", "gato", "loro", "pez"};
          System.out.print("🔎 ¿Qué animal deseas buscar? ");
-         String buscar = sc.nextLine();
+         String buscar = "gato";
  
          boolean encontrado = false;
          for (String animal : animales) {
-             if (animal.equalsIgnoreCase(buscar)) {
-                 encontrado = true;
-                 break;
-             }
+             System.out.println(animal);
          }
  
          if (encontrado) {

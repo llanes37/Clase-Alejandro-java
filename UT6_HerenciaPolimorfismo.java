@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /*
  * ******************************************************************************************
  *                         TEORIA Y CONCEPTOS: HERENCIA Y POLIMORFISMO EN JAVA
@@ -40,18 +42,37 @@
 // Clase principal para ejecutar la practica
 public class UT6_HerenciaPolimorfismo {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         // Creamos objetos de clases hijas
         Vehiculo coche1 = new Coche("Toyota", 2020, 5);
         Vehiculo moto1 = new Moto("Yamaha", 2022, false);
 
-        // Polimorfismo: ambos se manejan como Vehiculo
-        Vehiculo[] vehiculos = { coche1, moto1 };
+        // Pedimos datos del camion por consola.
+        System.out.print("Introduce la marca del camion: ");
+        String marcaCamion = scanner.nextLine();
+
+        System.out.print("Introduce el anio del camion: ");
+        int anioCamion = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Introduce la carga maxima del camion (toneladas): ");
+        double cargaMaximaCamion = Double.parseDouble(scanner.nextLine());
+
+        camion camionUsuario = new camion(marcaCamion, anioCamion, cargaMaximaCamion);
+        // Polimorfismo: todos se manejan como Vehiculo
+        Vehiculo[] vehiculos = { coche1, moto1, camionUsuario };
 
         // Recorremos y mostramos informacion (cada uno usa su version del metodo)
         for (Vehiculo vehiculo : vehiculos) {
             vehiculo.mostrarInformacion();
             vehiculo.arrancar();
             System.out.println("-----------------------------------");
+        }
+        // Recorremos solo camiones y usamos sus metodos.
+        camion[] camiones = { camionUsuario };
+        for (camion c : camiones) {
+            c.mostrarInformacion();
+            c.tocarBocina();
         }
 
         // Cambio de estado en un objeto especifico
@@ -63,6 +84,8 @@ public class UT6_HerenciaPolimorfismo {
         // 1. Crea una clase hija "Camion" con atributo "cargaMaxima".
         // 2. Sobrescribe mostrarInformacion() para incluir la carga.
         // 3. Agrega objetos Camion al arreglo y prueba el polimorfismo.
+
+        scanner.close();
     }
 }
 
@@ -166,6 +189,44 @@ class Moto extends Vehiculo {
             " | Anio: " + getAnio() +
             " | Maletero: " + (tieneMaletero ? "Si" : "No")
         );
+    }
+}
+class camion extends Vehiculo {
+    private double cargaMaxima;
+
+    public camion(String marca, int anio, double cargaMaxima) {
+        super(marca, anio);
+        // Reutilizamos el setter para centralizar la validacion.
+        setCargaMaxima(cargaMaxima);
+    }
+
+    public double getCargaMaxima() {
+        return cargaMaxima;
+    }
+
+    public void setCargaMaxima(double cargaMaxima) {
+        // Validacion: no se permite carga negativa.
+        if (cargaMaxima >= 0) {
+            this.cargaMaxima = cargaMaxima;
+        } else {
+            System.out.println("Error: la carga maxima no puede ser negativa.");
+            this.cargaMaxima = 0.0;
+        }
+    }
+
+    @Override
+    public void mostrarInformacion() {
+        // Sobrescritura: mostramos informacion comun + dato propio del camion.
+        System.out.println(
+            "Tipo: Camion | Marca: " + getMarca() +
+            " | Anio: " + getAnio() +
+            " | Carga maxima: " + cargaMaxima + " toneladas"
+        );
+    }
+
+    // Metodo personalizado para el camion.
+    public void tocarBocina() {
+        System.out.println("Camion " + getMarca() + ": POOOOON POOOOON!");
     }
 }
 
