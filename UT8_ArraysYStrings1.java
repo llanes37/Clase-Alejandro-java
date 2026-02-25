@@ -1,4 +1,4 @@
-/*
+﻿/*
  * ******************************************************************************************
  *                        TEORIA Y CONCEPTOS: ARRAYS Y COLECCIONES EN JAVA
  * ------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class UT8_ArraysYStrings {
+public class UT8_ArraysYStrings1 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -172,16 +172,16 @@ public class UT8_ArraysYStrings {
 
         System.out.print("Nueva ciudad para anadir: ");
         String nuevaCiudad = sc.nextLine().trim();
-        if (!nuevaCiudad.isEmpty()) {
+       
             ciudadesList.add(nuevaCiudad);
-        }
+                ciudadesList.add("Sevilla");
 
         System.out.print("Ciudad a eliminar (exacta): ");
-        String eliminar = sc.nextLine().trim();
-        boolean borrada = ciudadesList.remove(eliminar);
+        String eliminar = "Sevilla";
+     ciudadesList.remove(eliminar);
 
         System.out.println("Despues: " + ciudadesList);
-        System.out.println("Se elimino? " + borrada);
+       
     }
 
     // *INFO: MICRO-TEORIA - Mini CRUD basico con ArrayList.
