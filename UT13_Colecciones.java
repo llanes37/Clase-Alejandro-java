@@ -7,7 +7,7 @@
 
  import java.util.*;
 
- public class UT13_ColeccionesAvanzadas {
+ public class UT13_Colecciones {
  
      public static void main(String[] args) {
          Scanner sc = new Scanner(System.in); // 🛠️ Scanner para entrada por teclado
