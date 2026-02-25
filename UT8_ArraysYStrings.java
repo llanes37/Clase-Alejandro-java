@@ -1,8 +1,46 @@
-/******************************************************************************************
- *  CURSO DE PROGRAMACION EN JAVA - UNIDAD 8
- *  TEMA: ARRAYS + COLECCIONES (DE MENOS A MAS)
- *  OBJETIVO: practicar estructuras tipicas de DAW con enfoque guiado.
- ******************************************************************************************/
+/*
+ * ******************************************************************************************
+ *                        TEORIA Y CONCEPTOS: ARRAYS Y COLECCIONES EN JAVA
+ * ------------------------------------------------------------------------------------------
+ * En esta practica aprenderas a:
+ *
+ * - Trabajar con arrays (tamano fijo) para datos simples.
+ * - Usar ArrayList para listas dinamicas.
+ * - Usar HashSet para evitar duplicados.
+ * - Usar HashMap para relacionar clave-valor.
+ * - Usar TreeMap para mantener datos ordenados.
+ * - Combinar todo en un ejercicio integrador tipico de DAW.
+ *
+ * Objetivo de clase:
+ * Construir un mini sistema academico de consola, de menos a mas.
+ ******************************************************************************************
+ */
+
+/*
+ * TEORIA GLOBAL: ARRAYS VS COLECCIONES
+ * ------------------------------------
+ *
+ * 1) ARRAY:
+ *    - Tamano fijo.
+ *    - Acceso por indice.
+ *    - Muy util cuando conocemos la cantidad exacta de elementos.
+ *
+ * 2) ARRAYLIST:
+ *    - Tamano dinamico.
+ *    - Permite add/remove facilmente.
+ *
+ * 3) HASHSET:
+ *    - No admite duplicados.
+ *    - Ideal para catalogos unicos (modulos, tags, codigos).
+ *
+ * 4) HASHMAP:
+ *    - Almacena pares clave-valor.
+ *    - Ejemplo tipico: Alumno -> Nota.
+ *
+ * 5) TREEMAP:
+ *    - Como un Map, pero con claves ordenadas.
+ *    - Util para rankings o listados ordenados.
+ */
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +56,8 @@ public class UT8_ArraysYStrings {
         Scanner sc = new Scanner(System.in);
         int opcion;
 
+        // *INFO: Este menu permite practicar por fases, sin mezclar conceptos demasiado pronto.
+        // !IMPORTANT: Error tipico que evitamos: saltar a mapas sin dominar arrays/listas primero.
         do {
             mostrarMenu();
             opcion = leerEnteroEnRango(sc, "Elige opcion: ", 0, 8);
@@ -44,7 +84,8 @@ public class UT8_ArraysYStrings {
         sc.close();
     }
 
-    private static void mostrarMenu() {
+    // *INFO: Menu unico y claro para que el alumno vea progresion didactica.
+    public static void mostrarMenu() {
         System.out.println("\n===== UNIDAD 8: ARRAYS Y COLECCIONES =====");
         System.out.println("1. Array de notas (basico)");
         System.out.println("2. Busqueda en array");
@@ -57,12 +98,14 @@ public class UT8_ArraysYStrings {
         System.out.println("0. Salir");
     }
 
-    private static void ejercicioArrayNotas(Scanner sc) {
+    // *INFO: MICRO-TEORIA - Array de enteros y calculos basicos.
+    // !IMPORTANT: Que hace: calcula media/max/min/aprobadas en una sola pasada.
+    // !IMPORTANT: Por que: mejora claridad y eficiencia para primer curso.
+    // !IMPORTANT: Error tipico: iniciar max/min en 0 en vez del primer elemento.
+    public static void ejercicioArrayNotas(Scanner sc) {
         System.out.println("\n--- EJERCICIO 1: ARRAY DE NOTAS ---");
         int[] notas = new int[5];
 
-        // *INFO: Guardamos notas en array porque el tamano es fijo (5), lo que evita cambios de longitud a mitad de ejercicio.
-        // *INFO: Error tipico que evitamos: usar indices fuera de rango (siempre 0..length-1).
         for (int i = 0; i < notas.length; i++) {
             notas[i] = leerEnteroEnRango(sc, "Nota " + (i + 1) + " (0-10): ", 0, 10);
         }
@@ -71,8 +114,6 @@ public class UT8_ArraysYStrings {
         int max = notas[0];
         int min = notas[0];
 
-        // !IMPORTANT: Recorremos una sola vez para calcular suma, max y min; asi el alumno ve optimizacion basica sin complicar.
-        // !IMPORTANT: Error tipico que evitamos: inicializar max/min con 0 y fallar cuando todos los valores son menores o mayores.
         for (int nota : notas) {
             suma += nota;
             if (nota > max) {
@@ -87,19 +128,23 @@ public class UT8_ArraysYStrings {
         System.out.println("Notas: " + Arrays.toString(notas));
         System.out.println("Media: " + media + " | Max: " + max + " | Min: " + min);
         System.out.println("Aprobadas (>=5): " + contarAprobadas(notas));
+
+        // TODO: ampliar para mostrar tambien cuantas notas son sobresalientes (>=9).
     }
 
-    private static void ejercicioBusquedaArray(Scanner sc) {
+    // *INFO: MICRO-TEORIA - Busqueda lineal en array de Strings.
+    // ?QUESTION: Por que no usamos binary search aqui?
+    // *INFO: Porque el array no esta ordenado y queremos priorizar la tecnica base.
+    public static void ejercicioBusquedaArray(Scanner sc) {
         System.out.println("\n--- EJERCICIO 2: BUSQUEDA EN ARRAY ---");
         String[] lenguajes = {"java", "python", "javascript", "sql", "php"};
         System.out.println("Lista base: " + Arrays.toString(lenguajes));
+
         System.out.print("Que lenguaje quieres buscar? ");
         String objetivo = sc.nextLine().trim().toLowerCase();
 
         int posicion = -1;
 
-        // *INFO: Hacemos busqueda lineal porque el array es pequeno y es la tecnica base que se ense?a primero en DAW.
-        // *INFO: Error tipico que evitamos: comparar strings con == en vez de equals().
         for (int i = 0; i < lenguajes.length; i++) {
             if (lenguajes[i].equals(objetivo)) {
                 posicion = i;
@@ -112,16 +157,19 @@ public class UT8_ArraysYStrings {
         } else {
             System.out.println("No encontrado");
         }
+
+        // TODO: pedir 5 lenguajes al usuario en lugar de usar el array fijo.
     }
 
-    private static void ejercicioArrayAArrayList(Scanner sc) {
+    // *INFO: MICRO-TEORIA - Migrar de estructura fija (array) a dinamica (ArrayList).
+    // !IMPORTANT: Error tipico: usar Arrays.asList() y luego intentar add/remove directamente.
+    public static void ejercicioArrayAArrayList(Scanner sc) {
         System.out.println("\n--- EJERCICIO 3: ARRAY -> ARRAYLIST ---");
         String[] ciudadesArray = {"Madrid", "Sevilla", "Valencia", "Bilbao"};
         ArrayList<String> ciudadesList = new ArrayList<>(Arrays.asList(ciudadesArray));
 
-        // !IMPORTANT: Convertimos array fijo a ArrayList para permitir add/remove segun necesidad del negocio.
-        // !IMPORTANT: Error tipico que evitamos: intentar hacer add() sobre Arrays.asList() sin envolver en nuevo ArrayList.
         System.out.println("Antes: " + ciudadesList);
+
         System.out.print("Nueva ciudad para anadir: ");
         String nuevaCiudad = sc.nextLine().trim();
         if (!nuevaCiudad.isEmpty()) {
@@ -136,7 +184,10 @@ public class UT8_ArraysYStrings {
         System.out.println("Se elimino? " + borrada);
     }
 
-    private static void ejercicioListaAlumnos(Scanner sc) {
+    // *INFO: MICRO-TEORIA - Mini CRUD basico con ArrayList.
+    // !IMPORTANT: Que hace: alta/baja/listado de alumnos en memoria.
+    // !IMPORTANT: Caso limite: eliminar nombre inexistente sin lanzar excepcion.
+    public static void ejercicioListaAlumnos(Scanner sc) {
         System.out.println("\n--- EJERCICIO 4: ARRAYLIST DE ALUMNOS ---");
         ArrayList<String> alumnos = new ArrayList<>();
         int opcion;
@@ -163,14 +214,16 @@ public class UT8_ArraysYStrings {
                 default -> System.out.println("Opcion no valida");
             }
         } while (opcion != 0);
+
+        // TODO: ordenar alfabeticamente antes de listar.
     }
 
-    private static void ejercicioSetModulos(Scanner sc) {
+    // *INFO: MICRO-TEORIA - HashSet para valores unicos.
+    // !IMPORTANT: Error tipico: asumir que HashSet mantiene orden de insercion.
+    public static void ejercicioSetModulos(Scanner sc) {
         System.out.println("\n--- EJERCICIO 5: HASHSET DE MODULOS ---");
         HashSet<String> modulos = new HashSet<>();
 
-        // *INFO: HashSet elimina duplicados automaticamente; ideal para catalogos unicos (modulos, etiquetas, IDs).
-        // *INFO: Error tipico que evitamos: usar ArrayList y tener que controlar duplicados manualmente.
         for (int i = 1; i <= 6; i++) {
             System.out.print("Modulo " + i + ": ");
             String modulo = sc.nextLine().trim().toUpperCase();
@@ -181,18 +234,22 @@ public class UT8_ArraysYStrings {
 
         System.out.println("Modulos unicos: " + modulos);
         System.out.println("Cantidad unica: " + modulos.size());
+
+        // ?QUESTION: Cuando interesaria cambiar HashSet por TreeSet?
     }
 
-    private static void ejercicioMapNotas(Scanner sc) {
+    // *INFO: MICRO-TEORIA - HashMap para clave-valor.
+    // !IMPORTANT: Que hace: registra nota por alumno y permite consulta puntual.
+    // !IMPORTANT: Error tipico: no saber que put() con misma clave reemplaza el valor anterior.
+    public static void ejercicioMapNotas(Scanner sc) {
         System.out.println("\n--- EJERCICIO 6: HASHMAP ALUMNO -> NOTA ---");
         HashMap<String, Integer> notasPorAlumno = new HashMap<>();
 
-        // !IMPORTANT: HashMap representa relacion clave-valor; aqui alumno->nota como caso tipico de DAW.
-        // !IMPORTANT: Error tipico que evitamos: repetir claves sin saber que put() sobreescribe el valor previo.
         for (int i = 1; i <= 4; i++) {
             System.out.print("Alumno " + i + ": ");
             String alumno = sc.nextLine().trim();
             int nota = leerEnteroEnRango(sc, "Nota (0-10): ", 0, 10);
+
             if (!alumno.isEmpty()) {
                 notasPorAlumno.put(alumno, nota);
             }
@@ -209,18 +266,19 @@ public class UT8_ArraysYStrings {
         System.out.println(nota == null ? "No existe en el mapa" : "Nota de " + buscar + ": " + nota);
     }
 
-    private static void ejercicioTreeMapRanking(Scanner sc) {
+    // *INFO: MICRO-TEORIA - TreeMap para mantener orden por clave.
+    // ?QUESTION: Como resolver empates de nota si la clave es la propia nota?
+    // *INFO: Usamos una clave compuesta para evitar colisiones.
+    public static void ejercicioTreeMapRanking(Scanner sc) {
         System.out.println("\n--- EJERCICIO 7: TREEMAP RANKING ORDENADO ---");
         TreeMap<Integer, String> ranking = new TreeMap<>();
 
-        // ?QUESTION: Que pasa si dos alumnos tienen la misma nota y la nota es la clave?
-        // *INFO: En TreeMap no puede haber clave repetida; combinamos nota con contador para no pisar datos.
         for (int i = 1; i <= 4; i++) {
             System.out.print("Alumno " + i + ": ");
             String nombre = sc.nextLine().trim();
             int nota = leerEnteroEnRango(sc, "Nota (0-10): ", 0, 10);
 
-            int clave = nota * 100 + i; // evita colision de clave cuando hay empate de nota
+            int clave = nota * 100 + i;
             ranking.put(clave, nombre + " (nota " + nota + ")");
         }
 
@@ -230,7 +288,10 @@ public class UT8_ArraysYStrings {
         }
     }
 
-    private static void ejercicioIntegrador(Scanner sc) {
+    // *INFO: MICRO-TEORIA - Ejercicio final integrador.
+    // !IMPORTANT: Une array + list + set + map en un mismo flujo realista.
+    // !IMPORTANT: Error tipico que evitamos: mezclar toda la logica sin separar fases.
+    public static void ejercicioIntegrador(Scanner sc) {
         System.out.println("\n--- EJERCICIO 8: INTEGRADOR ARRAYS + COLECCIONES ---");
         int total = leerEnteroEnRango(sc, "Cuantos alumnos vas a registrar (3-10)? ", 3, 10);
 
@@ -239,8 +300,6 @@ public class UT8_ArraysYStrings {
         HashSet<String> modulosUnicos = new HashSet<>();
         HashMap<String, Integer> notaMedia = new HashMap<>();
 
-        // !IMPORTANT: Flujo de menos a mas: capturamos en array, pasamos a lista y finalmente construimos set/map para casos reales.
-        // !IMPORTANT: Error tipico que evitamos: mezclar entrada, validacion y calculo en un bloque imposible de mantener.
         for (int i = 0; i < total; i++) {
             System.out.print("Alumno " + (i + 1) + ": ");
             String alumno = sc.nextLine().trim();
@@ -275,10 +334,11 @@ public class UT8_ArraysYStrings {
             }
         }
 
-        // TODO: ampliar con menu CRUD completo (alta, baja, modificacion y consulta por nombre).
+        // TODO: anadir porcentaje de aprobados y media global del grupo.
     }
 
-    private static int contarAprobadas(int[] notas) {
+    // *INFO: Utilidad de apoyo para contar aprobadas en array.
+    public static int contarAprobadas(int[] notas) {
         int aprobadas = 0;
         for (int nota : notas) {
             if (nota >= 5) {
@@ -288,7 +348,10 @@ public class UT8_ArraysYStrings {
         return aprobadas;
     }
 
-    private static int leerEnteroEnRango(Scanner sc, String mensaje, int minimo, int maximo) {
+    // *INFO: Entrada robusta para enteros en rango.
+    // !IMPORTANT: Que hace: evita NumberFormatException en flujo principal.
+    // !IMPORTANT: Caso limite: usuario escribe texto o numero fuera de rango.
+    public static int leerEnteroEnRango(Scanner sc, String mensaje, int minimo, int maximo) {
         while (true) {
             System.out.print(mensaje);
             String entrada = sc.nextLine().trim();
@@ -304,4 +367,9 @@ public class UT8_ArraysYStrings {
             }
         }
     }
+
+    // !IMPORTANT: TAREAS PARA EL ALUMNO (SUBIR NIVEL)
+    // TODO: 1) Crear opcion para modificar nota de un alumno existente en HashMap.
+    // TODO: 2) Exportar el resumen del integrador a fichero de texto.
+    // TODO: 3) Implementar busqueda parcial por nombre (contains) en la lista.
 }
