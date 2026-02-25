@@ -31,12 +31,23 @@
              sc.nextLine();               // 🧹 Limpia el buffer tras leer número
  
              switch (opcion) {
-                 case 1 -> crearArchivo("archivo.txt");
-                 case 2 -> escribirEnArchivo("archivo.txt");
-                 case 3 -> leerArchivo("archivo.txt");
-                 case 4 -> comprobarArchivo("archivo.txt");
-                 case 0 -> System.out.println("👋 ¡Saliendo del programa!");
-                 default -> System.out.println("⚠️ Opción no válida.");
+                 case 1:
+                     crearArchivo();
+                     break;
+                 case 2:
+                     escribirEnArchivo();
+                     break;
+                 case 3:
+                     leerArchivo("libro.pdf");
+                     break;
+                 case 4:
+                     comprobarArchivo();
+                     break;
+                 case 0:
+                     System.out.println("👋 ¡Saliendo del programa!");
+                     break;
+                 default:
+                     System.out.println("⚠️ Opción no válida.");
              }
          } while (opcion != 0); // 🔁 Repite mientras no se elija salir
  
@@ -47,33 +58,35 @@
      // ──────────────────────────────────────────────
      // ? File permite representar un archivo físico en disco.
      // ? La función createNewFile() crea el archivo solo si no existe.
-     public static void crearArchivo(String nombre) {
-         try {
-             File archivo = new File(nombre);        // 📦 Creamos un objeto File
-             if (archivo.createNewFile()) {          // ✅ Si no existe, se crea
-                 System.out.println("✅ Archivo creado: " + archivo.getName());
-             } else {
-                 System.out.println("ℹ️ El archivo ya existe.");
-             }
-         } catch (IOException e) {
-             System.out.println("❌ Error al crear el archivo.");
-             e.printStackTrace();
-         }
- 
-         // ! ✅ TAREA ALUMNO:
-         // * Cambia el nombre del archivo a "notas.txt" y vuelve a probar
-     }
+public static void crearArchivo() {
+    try {
+        File archivo = new File("libro.pdf");        // 📦 Creamos un objeto File
+
+        if (archivo.createNewFile()) {
+            System.out.println("✅ Archivo creado: " + archivo.getName());
+        } else {
+            System.out.println("ℹ️ El archivo ya existe.");
+        }
+    } catch (IOException e) {
+        System.out.println("❌ Error al crear el archivo.");
+        e.printStackTrace();
+    }
+
+    // ! ✅ TAREA ALUMNO:
+    // * Cambia el nombre del archivo a "notas.txt" y vuelve a probar
+}
  
      // * 📖 TEORÍA: Escribir en archivo
      // ──────────────────────────────────────────────
      // ? FileWriter permite escribir texto en el archivo (sobrescribe).
      // ? También se puede abrir en modo append (añadir al final).
-     public static void escribirEnArchivo(String nombre) {
+     public static void escribirEnArchivo() {
          try {
-             FileWriter escritor = new FileWriter(nombre); // ✍️ Abrimos archivo (modo sobrescritura)
-             escritor.write("Línea 1: Este es un ejemplo.\n"); // 📝 Escribimos una línea
-             escritor.write("Línea 2: Prueba de escritura en archivo."); // 📝 Otra línea
-             escritor.close(); // 🔐 Cerramos el archivo tras escribir
+             FileWriter escribirArchivo = new FileWriter("notas.txt");// ✍️ Abrimos archivo (modo sobrescritura)
+             escribirArchivo.write("Línea 1: Este es un ejemplo.\n"); // 📝 Escribimos una línea
+             escribirArchivo.write("Línea 2: Prueba de escritura en archivo."); // 📝 Otra línea
+             escribirArchivo.write("Hola, soy Alejandro");
+             escribirArchivo.close(); // 🔐 Cerramos el archivo tras escribir
              System.out.println("📝 Escritura completada.");
          } catch (IOException e) {
              System.out.println("❌ Error al escribir en el archivo.");
@@ -110,10 +123,10 @@
      // * 📖 TEORÍA: Comprobar archivo
      // ──────────────────────────────────────────────
      // ? Con File podemos verificar si un archivo existe y obtener información sobre él.
-     public static void comprobarArchivo(String nombre) {
-         File archivo = new File(nombre); // 📦 Creamos un objeto File
+     public static void comprobarArchivo() {
+         File archivo = new File("notas.txt"); // 📦 Creamos un objeto File
          if (archivo.exists()) {          // ✅ Si existe, mostramos detalles
-             System.out.println("📦 El archivo '" + nombre + "' existe.");
+             System.out.println("📦 El archivo '" + archivo.getName() + "' existe.");
              System.out.println("📏 Tamaño: " + archivo.length() + " bytes");
              System.out.println("📍 Ruta absoluta: " + archivo.getAbsolutePath());
          } else {
