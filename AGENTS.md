@@ -66,6 +66,35 @@ Micro-plantilla sugerida:
 - `// ?QUESTION:` pregunta guiada para que el alumno piense.
 - `// TODO:` mini reto o ampliación controlada.
 
+## Patron obligatorio de unidad didactica (UT7/UT12)
+Para nuevos archivos de practica o refactor didactico, seguir SIEMPRE este patron:
+1. Bloque inicial grande: "TEORIA Y CONCEPTOS" de la unidad.
+2. Bloque "TEORIA GLOBAL" antes del `main`.
+3. `main` con menu por opciones (`do-while` + `switch`) cuando el tema lo permita.
+4. Cada opcion del menu llama a un metodo separado y corto.
+5. Antes de cada metodo: bloque breve de teoria + objetivo del metodo.
+6. Cierre del archivo con bloque `TAREA PARA EL ALUMNO` (repaso/ampliacion).
+
+Reglas de menu didactico:
+- Mostrar opciones claras en consola y una opcion `0. Salir`.
+- Validar entrada y limpiar buffer para evitar fallos tipicos.
+- Mensajes de error entendibles para alumno ("opcion no valida", "entrada incorrecta").
+
+Reglas para TAREA PARA EL ALUMNO:
+- Incluir entre 2 y 5 tareas progresivas.
+- Al menos 1 tarea de repaso y 1 de ampliacion.
+- Redaccion accionable (verbo en imperativo: "Crea", "Modifica", "Prueba", "Explica").
+
+## Better Comments perfecto (aplicacion practica)
+Ademas de usar los tags exactos, aplicar esta distribucion minima en cada metodo relevante:
+- 1 comentario `// *INFO:` para contexto.
+- 1 comentario `// !IMPORTANT:` para decision clave + error tipico.
+- 1 comentario `// TODO:` con mini reto o mejora.
+- `// ?QUESTION:` cuando sirva para reflexion guiada (recomendado en metodos principales).
+
+Si hay conflicto entre estilo visual y claridad:
+- Priorizar SIEMPRE claridad didactica y compilacion correcta.
+
 ## Trabajo con PDFs
 Si hay PDF(s) como fuente de requisitos:
 - No inventar requisitos.
