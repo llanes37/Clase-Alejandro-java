@@ -1,76 +1,105 @@
-# UT8 - Arrays y Colecciones (de menos a mas)
+# Practica Final POO con Clase Intermedia y Arrays
 
 ## Enunciado
-Desarrolla un programa en Java con menu interactivo para practicar estructuras de datos tipicas de DAW.
-El programa debe avanzar por dificultad:
-1. Arrays (tamano fijo)
-2. ArrayList (tamano dinamico)
-3. HashSet (sin duplicados)
-4. HashMap (clave-valor)
-5. TreeMap (ordenacion por clave)
-6. Integracion de todo en un mini caso real
+Desarrolla un programa en Java que modele una empresa usando Programacion Orientada a Objetos.
+
+El ejercicio debe incluir:
+- Una clase `Empresa`.
+- Una clase intermedia `Departamento`.
+- Una clase `Empleado`.
+- Arrays de objetos para guardar departamentos y empleados.
+- Un menu en consola para probar las operaciones principales.
+
+Operaciones minimas del programa:
+1. Mostrar un resumen de la empresa.
+2. Listar departamentos y empleados.
+3. Anadir un empleado a un departamento.
+4. Buscar un empleado por nombre.
+5. Calcular el gasto salarial total.
+6. Mostrar el departamento con mas empleados.
 
 ## Modelado
-- `int[] notas`: datos numericos de tamano fijo.
-- `String[] lenguajes`: busqueda lineal de texto.
-- `ArrayList<String>`: lista editable de alumnos/ciudades.
-- `HashSet<String>`: modulos unicos sin repetidos.
-- `HashMap<String, Integer>`: nota asociada a cada alumno.
-- `TreeMap<Integer, String>`: ranking ordenado automaticamente.
+- `Empresa`
+  Guarda el nombre, el CIF y un array de `Departamento`.
+- `Departamento`
+  Es la clase intermedia. Guarda su nombre y un array de `Empleado`.
+- `Empleado`
+  Guarda los datos basicos de cada trabajador: id, nombre, edad, puesto y salario.
 
-## Explicacion de metodos principales
-- `mostrarMenu()`: imprime opciones del 0 al 8.
-- `ejercicioArrayNotas(...)`: calcula media, maximo, minimo y aprobadas.
-- `ejercicioBusquedaArray(...)`: busqueda secuencial en array de Strings.
-- `ejercicioArrayAArrayList(...)`: conversion de estructura fija a dinamica.
-- `ejercicioListaAlumnos(...)`: mini CRUD basico con `ArrayList`.
-- `ejercicioSetModulos(...)`: elimina duplicados con `HashSet`.
-- `ejercicioMapNotas(...)`: alta y consulta de notas con `HashMap`.
-- `ejercicioTreeMapRanking(...)`: muestra ranking ordenado con `TreeMap`.
-- `ejercicioIntegrador(...)`: combina array + list + set + map en una sola practica.
-- `leerEnteroEnRango(...)`: valida entrada y evita errores de formato/rango.
+Relacion entre clases:
+- Una `Empresa` tiene varios `Departamento`.
+- Un `Departamento` tiene varios `Empleado`.
+- Un `Empleado` pertenece a un `Departamento`.
 
-## Edge cases (casos limite)
-- Entradas no numericas cuando se pide un entero.
-- Numeros fuera de rango (por ejemplo, nota -1 o 11).
-- Nombres vacios (se asigna un nombre por defecto en el integrador).
-- Duplicados en modulos (HashSet los elimina).
-- Claves repetidas en `HashMap` (se sobreescribe el valor).
-- Empates de nota en `TreeMap` (se evita colision usando clave compuesta).
+## Explicacion de metodos
+- `crearEmpresaDemo()`
+  Crea datos de ejemplo para poder probar el programa sin introducir todo a mano.
+- `mostrarResumenEmpresa(Empresa empresa)`
+  Enseña datos globales como total de empleados y gasto salarial.
+- `mostrarDepartamentosYEmpleados(Empresa empresa)`
+  Recorre los arrays de objetos y lista el contenido.
+- `contratarEmpleado(Empresa empresa)`
+  Pide datos por teclado, crea un objeto `Empleado` y lo guarda en el departamento elegido.
+- `buscarEmpleado(Empresa empresa)`
+  Realiza una busqueda secuencial por nombre.
+- `calcularGastoSalarialTotal()`
+  Suma los salarios de todos los empleados de todos los departamentos.
+- `obtenerDepartamentoConMasEmpleados()`
+  Recorre los departamentos y devuelve el que tiene mas empleados.
+
+## Edge cases
+- Intentar anadir un empleado a un departamento lleno.
+- Introducir texto cuando el programa espera un numero.
+- Escribir un nombre vacio.
+- Buscar un empleado que no existe.
+- Calcular datos cuando un departamento no tiene empleados.
 
 ## Como ejecutar
 1. Compilar:
 ```bash
-javac UT8_ArraysYStrings.java
+javac UT5_Practica_Final_Empresa.java
 ```
+
 2. Ejecutar:
 ```bash
-java UT8_ArraysYStrings
+java UT5_Practica_Final_Empresa
 ```
-3. Probar el flujo recomendado:
-- Opcion 1 -> arrays basicos
-- Opcion 4 -> lista dinamica
-- Opcion 6 -> mapa de notas
-- Opcion 8 -> integrador final
 
-## Entrada/salida esperada (ejemplo rapido)
-Entrada:
-- Opcion `1`
-- Notas: `7, 5, 9, 4, 8`
+3. Flujo recomendado de prueba:
+- Opcion `1` para ver el resumen inicial.
+- Opcion `2` para ver los departamentos cargados.
+- Opcion `3` para contratar un empleado nuevo.
+- Opcion `4` para buscarlo por nombre.
+- Opcion `5` para comprobar que el gasto salarial ha cambiado.
 
-Salida esperada (resumen):
-- `Notas: [7, 5, 9, 4, 8]`
-- `Media: 6.6 | Max: 9 | Min: 4`
-- `Aprobadas (>=5): 4`
+## Entrada/salida esperada
+Entrada de ejemplo:
+- Opcion: `3`
+- Departamento: `1`
+- Id: `10`
+- Nombre: `Carlos`
+- Edad: `22`
+- Puesto: `Programador Junior`
+- Salario: `1500`
+
+Salida esperada:
+- `Empleado contratado correctamente en Desarrollo.`
+
+Si despues eliges la opcion `4` y buscas `Carlos`, deberias ver una ficha completa con sus datos.
 
 ## Errores tipicos del alumno y como evitarlos
-- Comparar `String` con `==`: usar `equals(...)` o `equalsIgnoreCase(...)`.
-- Recorrer array con `<= length`: debe ser `< length`.
-- Olvidar limpiar/validar entrada: usar `leerEnteroEnRango(...)`.
-- Creer que `HashMap` guarda orden: si quieres orden, usar `TreeMap`.
-- Modificar directamente un array esperando que crezca: usar `ArrayList`.
+- Recorrer todo el `length` del array en lugar de solo las posiciones usadas.
+  Solucion: guarda un contador como `totalEmpleados`.
+- Comparar `String` con `==`.
+  Solucion: usa `equals(...)` o `equalsIgnoreCase(...)`.
+- Anadir elementos sin comprobar si el array esta lleno.
+  Solucion: valida antes de insertar.
+- Meter toda la logica en `main`.
+  Solucion: reparte el trabajo en metodos y clases.
+- No distinguir entre clase principal y clase intermedia.
+  Solucion: piensa quien contiene a quien en el problema real.
 
 ## 3 ejercicios extra
-1. Anade filtro de aprobados/suspensos en `ejercicioMapNotas`.
-2. En el integrador, calcula media global y porcentaje de aprobados.
-3. Exporta el resumen final a un fichero `resumen_ut8.txt`.
+1. Crea una opcion para eliminar un empleado por id.
+2. Anade el calculo del salario medio por departamento.
+3. Sustituye los arrays por `ArrayList` y compara ambas soluciones.

@@ -162,13 +162,15 @@ public class UT12_Ficheros_Final {
     // ?QUESTION: Que pasa si la ruta apunta a una carpeta que aun no existe?
     // TODO: Modifica el metodo para que tambien cree subcarpetas como "datos_ut12/pruebas/enero".
     public static void crearFicheroVacio() {
-        String nombre = leerTextoNoVacio("Nombre del nuevo fichero (ejemplo notas.txt): ");
-        File archivo = resolverArchivo(nombre);
+        // String nombre = leerTextoNoVacio("Nombre del nuevo fichero (ejemplo notas.txt): ");
+        //  File archivo = resolverArchivo(nombre);
+        File archivo = new File("Alejandr.txt");
 
         try {
             // *INFO: Intentamos crear el fichero solo una vez y mostramos un mensaje distinto segun el resultado para que el alumno vea ambos escenarios.
             // !IMPORTANT: No se debe asumir que siempre se crea; si ya existe, Java no lo borra ni lo reinicia automaticamente, evitando perdida accidental de datos.
             if (archivo.createNewFile()) {
+                archivo.getName();
                 System.out.println("Fichero creado correctamente: " + archivo.getAbsolutePath());
             } else {
                 System.out.println("El fichero ya existia: " + archivo.getAbsolutePath());
@@ -188,15 +190,17 @@ public class UT12_Ficheros_Final {
     // ?QUESTION: En que situaciones reales si interesa sobrescribir y no anadir?
     // TODO: Cambia el formato para guardar una cabecera con fecha y autor antes del texto introducido.
     public static void escribirSobrescribiendo() {
-        String nombre = leerTextoNoVacio("Nombre del fichero a escribir: ");
-        File archivo = resolverArchivo(nombre);
-        String contenido = leerBloqueTexto();
+        File archivo = new File("Alejandro.txt");
+        //String nombre = leerTextoNoVacio("Nombre del fichero a escribir: ");
+        //File archivo = resolverArchivo(nombre);
+        //String contenido = leerBloqueTexto();
 
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(archivo))) {
             // *INFO: BufferedWriter mejora la escritura de texto y el try-with-resources cierra el recurso incluso si aparece una excepcion.
             // !IMPORTANT: Escribir todo dentro del try evita el error tipico de usar un escritor ya cerrado o de olvidar el close().
-            escritor.write(contenido);
+            escritor.write(" contenido ");
             escritor.newLine();
+            escritor.write("HOla buenos dias");
             System.out.println("Contenido guardado sobrescribiendo el fichero.");
         } catch (IOException e) {
             System.out.println("Error al escribir en el fichero: " + e.getMessage());
@@ -212,22 +216,19 @@ public class UT12_Ficheros_Final {
     // !IMPORTANT: El modo append conserva la informacion anterior y evita el error de borrar datos cuando solo queriamos registrar una nueva linea.
     // TODO: Haz que cada linea anadida empiece por un contador automatico o por una marca de tiempo.
     public static void anadirContenido() {
-        String nombre = leerTextoNoVacio("Nombre del fichero al que anadir texto: ");
-        File archivo = resolverArchivo(nombre);
-        String contenido = leerBloqueTexto();
+       // String nombre = leerTextoNoVacio("Nombre del fichero al que anadir texto: ");
+       // File archivo = resolverArchivo(nombre);
+        // String contenido = leerBloqueTexto();
+        File archivo = new File("Alejandro.txt");
 
-        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(archivo, true))) {
-            // *INFO: Usamos true para activar append y anadimos un salto antes del bloque solo si el fichero ya tenia contenido.
-            // !IMPORTANT: Revisar archivo.length() evita juntar texto pegado al final de la ultima linea, un fallo visual muy comun en practicas iniciales.
-            if (archivo.exists() && archivo.length() > 0) {
-                escritor.newLine();
-            }
-            escritor.write(contenido);
+      try (BufferedWriter escritor = new BufferedWriter(new FileWriter(archivo, true))) {
+            escritor.write("Linea anadida al final del fichero.");
             escritor.newLine();
-            System.out.println("Contenido anadido correctamente.");
+            System.out.println("Contenido anadido al final del fichero.");
         } catch (IOException e) {
             System.out.println("Error al anadir contenido: " + e.getMessage());
-        }
+
+      }
     }
 
     /*
@@ -240,8 +241,9 @@ public class UT12_Ficheros_Final {
     // ?QUESTION: Por que es mejor leer con un bucle while hasta null que asumir un numero fijo de lineas?
     // TODO: Muestra tambien el numero de linea delante de cada linea leida.
     public static void leerFicheroLineaALinea() {
-        String nombre = leerTextoNoVacio("Nombre del fichero a leer: ");
-        File archivo = resolverArchivo(nombre);
+        //String nombre = leerTextoNoVacio("Nombre del fichero a leer: ");
+        //File archivo = resolverArchivo(nombre);
+        File archivo = new File("Alejandro.txt");
 
         if (!archivo.exists()) {
             System.out.println("No existe el fichero indicado.");
@@ -257,6 +259,7 @@ public class UT12_Ficheros_Final {
             while ((linea = lector.readLine()) != null) {
                 System.out.println("-> " + linea);
             }
+            
         } catch (IOException e) {
             System.out.println("Error al leer el fichero: " + e.getMessage());
         }

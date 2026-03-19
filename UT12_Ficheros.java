@@ -61,7 +61,10 @@
 public static void crearArchivo() {
     try {
         File archivo = new File("libro.pdf");        // 📦 Creamos un objeto File
-
+        File archivoAlejandro  = new File ("marco.pdf");
+        if (archivoAlejandro.createNewFile()){
+            System.out.println("Archivo creado : " + archivoAlejandro.getName());
+        }
         if (archivo.createNewFile()) {
             System.out.println("✅ Archivo creado: " + archivo.getName());
         } else {
@@ -82,6 +85,8 @@ public static void crearArchivo() {
      // ? También se puede abrir en modo append (añadir al final).
      public static void escribirEnArchivo() {
          try {
+             FileWriter escribirArchivoAlejandro = new FileWriter("marco.pdf", true); // ✍️ Abrimos archivo (modo append)
+             escribirArchivoAlejandro.write("Line 1 : Hola soy Alejandro");
              FileWriter escribirArchivo = new FileWriter("notas.txt");// ✍️ Abrimos archivo (modo sobrescritura)
              escribirArchivo.write("Línea 1: Este es un ejemplo.\n"); // 📝 Escribimos una línea
              escribirArchivo.write("Línea 2: Prueba de escritura en archivo."); // 📝 Otra línea
@@ -103,6 +108,11 @@ public static void crearArchivo() {
      // ? BufferedReader permite leer línea por línea.
      public static void leerArchivo(String nombre) {
          try {
+             FileReader lecturaAlejandro = new FileReader ("marco.pdf");
+             BufferedReader lector = new BufferedReader(lecturaAlejandro);
+             while ( lector.readLine() != null){
+                System.out.println("Leectura de archivos");
+             }
              FileReader lector = new FileReader(nombre);             // 📖 Abrimos el archivo
              BufferedReader buffer = new BufferedReader(lector);     // 📥 Leemos líneas completas
              String linea;
@@ -124,6 +134,12 @@ public static void crearArchivo() {
      // ──────────────────────────────────────────────
      // ? Con File podemos verificar si un archivo existe y obtener información sobre él.
      public static void comprobarArchivo() {
+         File archivoAlejandro = new File ("marco.pdf");
+         if (archivoAlejandro.exists()){
+            System.out.println("Archivo" + archivoAlejandro.getName() + " existe ");
+            System.out.println(" Tamayo " + archivoAlejandro.length() + " Bytes");
+            System.out.println("Ruta absoluta. " + archivoAlejandro.getAbsolutePath());
+         }
          File archivo = new File("notas.txt"); // 📦 Creamos un objeto File
          if (archivo.exists()) {          // ✅ Si existe, mostramos detalles
              System.out.println("📦 El archivo '" + archivo.getName() + "' existe.");
