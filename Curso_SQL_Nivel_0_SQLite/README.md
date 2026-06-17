@@ -110,6 +110,17 @@ Pasos:
 
 La ruta real del curso son estos scripts. Este README te da la teoria minima y el orden exacto.
 
+### Antes de empezar: Fundamentos (muy recomendado)
+
+Si nunca has tocado una base de datos, empieza por la guia de fundamentos. Explica
+de forma muy visual que es una base de datos, que es una tabla y como se conectan
+las tablas entre si (claves primarias y foraneas), antes de escribir nada de SQL.
+
+- Guia: `Guia_Fundamentos_Base_de_Datos.md`
+
+En la plataforma web (`Plataforma_SQL.html`) es la primera unidad del menu:
+"Fundamentos - Que es una BBDD".
+
 ### Paso 0: Preparar la base de datos (obligatorio)
 
 - Ejecuta: `scripts/00_reset_biblioteca_nivel0.sql`
@@ -122,6 +133,21 @@ SELECT COUNT(*) FROM socios;
 SELECT COUNT(*) FROM libros;
 SELECT COUNT(*) FROM prestamos;
 ```
+
+### Paso 0.5: Ver y entender la base de datos (recomendado)
+
+Antes de empezar a consultar, dedica un momento a MIRAR la base de datos por
+dentro: sus tablas, columnas y relaciones. Asi entiendes que hay antes de pedir
+nada.
+
+- Guia: `Guia_Ver_y_Entender_la_BBDD_en_VSCode.md`
+- Practica: `scripts/00b_ver_y_entender_la_bbdd.sql`
+- Solucion: `soluciones/00b_ver_y_entender_la_bbdd_resuelta.sql`
+
+Que veras: como abrir el `.db` con la extension SQLite Viewer, como ver la
+estructura con `PRAGMA table_info(...)`, como leer las relaciones (claves
+foraneas) y, lo mas util, como ROMPER una clave foranea a proposito para entender
+por que existe.
 
 ### Paso 1: Ver datos con SELECT
 

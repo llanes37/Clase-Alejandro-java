@@ -15,31 +15,20 @@ WHERE ciudad = 'Madrid';
 -- * EXPECT: deberian salir 2 filas (Ana Ruiz y Marta Gil).
 
 -- TODO: muestra los libros del genero 'Fantasia'.
--- * Plantilla:
--- SELECT titulo, genero FROM libros WHERE genero = 'Fantasia';
 
 -- TODO: muestra los libros con mas de 200 paginas.
--- * Plantilla:
--- SELECT titulo, paginas FROM libros WHERE paginas > 200;
 
 -- TODO: muestra los socios que no tienen telefono.
--- * Plantilla:
--- SELECT nombre, telefono FROM socios WHERE telefono IS NULL;
 
 -- TODO: muestra los prestamos que NO estan devueltos.
--- * Plantilla:
--- SELECT prestamo_id, devuelto FROM prestamos WHERE devuelto = 'NO';
 
 -- TODO: muestra los socios cuyo nombre empieza por 'A'.
--- * Plantilla:
--- SELECT nombre FROM socios WHERE nombre LIKE 'A%';
 
 -- TODO: muestra los libros con menos de 200 paginas.
--- * Plantilla:
--- SELECT titulo, paginas FROM libros WHERE paginas < 200;
 
 -- * Pista:
 -- * Para datos vacios usa IS NULL.
 -- * Para texto parcial usa LIKE.
 -- ? Si una consulta no devuelve filas:
 -- * No siempre es error. Puede ser que tu filtro no coincida con los datos.
+-- * Cuando termines, abre la pestana "Solucion" para comprobar.

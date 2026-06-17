@@ -512,6 +512,97 @@
     .message.info { background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.18); color: #bfdbfe; }
     .message.success { background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.18); color: #bbf7d0; }
     .message.error { background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.22); color: #fecaca; white-space: pre-wrap; }
+    .message code { font-family: var(--font-code); }
+
+    .execution-card,
+    .diagnostic-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .execution-card-header,
+    .diagnostic-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .execution-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: #dbe7f4;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .execution-sql {
+      margin: 0;
+      padding: 14px 16px;
+      font-family: var(--font-code);
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: #dbe7f4;
+      background: rgba(2, 6, 23, 0.62);
+      white-space: pre-wrap;
+      overflow: auto;
+    }
+
+    .diagnostic-card {
+      border-color: rgba(239, 68, 68, 0.24);
+      background: linear-gradient(180deg, rgba(127, 29, 29, 0.18), rgba(20, 14, 22, 0.6));
+    }
+
+    .diagnostic-card.successish {
+      border-color: rgba(34, 197, 94, 0.24);
+      background: linear-gradient(180deg, rgba(20, 83, 45, 0.15), rgba(11, 22, 18, 0.55));
+    }
+
+    .diagnostic-body {
+      padding: 14px 16px 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .diagnostic-title {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .diagnostic-text {
+      margin: 0;
+      color: #e7eef7;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .diagnostic-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #dbe7f4;
+      line-height: 1.6;
+    }
+
+    .diagnostic-list li + li {
+      margin-top: 6px;
+    }
 
     .result-card,
     .table-browser {
@@ -564,6 +655,86 @@
     .help-body { padding: 22px; max-height: min(72vh, 860px); overflow: auto; }
     .help-list { margin: 0; padding-left: 18px; color: #d5dfeb; line-height: 1.7; }
     .help-list li + li { margin-top: 10px; }
+    .ai-body {
+      padding: 20px 22px 22px;
+      max-height: min(76vh, 860px);
+      overflow: auto;
+      display: grid;
+      gap: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 30%),
+        radial-gradient(circle at top left, rgba(249, 115, 22, 0.08), transparent 30%);
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .ai-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      padding: 14px 16px;
+    }
+
+    .ai-card h4 {
+      margin: 0 0 10px;
+      font-size: 0.92rem;
+    }
+
+    .ai-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #d5dfeb;
+      line-height: 1.6;
+    }
+
+    .ai-list li + li {
+      margin-top: 8px;
+    }
+
+    .ai-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .ai-output {
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      border-radius: 18px;
+      background: rgba(2, 6, 23, 0.72);
+      overflow: hidden;
+    }
+
+    .ai-output-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ai-output pre {
+      margin: 0;
+      padding: 16px;
+      white-space: pre-wrap;
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+      line-height: 1.65;
+      color: #dbe7f4;
+      max-height: 360px;
+      overflow: auto;
+    }
+
+    .ai-inline-note {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
 
     .pill {
       display: inline-flex;
@@ -671,6 +842,7 @@
       .toolbar, .table-actions, .tab-row { width: 100%; }
       .btn, .tab, .table-chip { width: 100%; justify-content: center; text-align: center; }
       .panel-header { align-items: stretch; }
+      .ai-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -702,6 +874,7 @@
             <button class="btn" id="btn-toggle-content">Ocultar teoria</button>
             <button class="btn" id="btn-toggle-lab">Ocultar laboratorio</button>
             <button class="btn secondary" id="btn-load-snippet">Pasar bloque al editor</button>
+            <button class="btn secondary" id="btn-open-ai-help">Apoyo IA</button>
             <button class="btn" id="btn-open-help">Ayuda</button>
             <button class="btn" id="btn-fullscreen">Pantalla completa</button>
             <button class="btn" id="btn-open-schema">Ver esquema</button>
@@ -839,12 +1012,52 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
     </div>
   </div>
 
+  <div class="schema-modal" id="ai-help-modal">
+    <div class="schema-card" style="width:min(980px,100%);">
+      <div class="panel-header">
+        <div>
+          <h3>Apoyo IA para SQL</h3>
+          <div class="panel-subtitle">Diagnostico local y prompt listo para llevar a ChatGPT u otro asistente.</div>
+        </div>
+        <button class="btn" id="btn-close-ai-help">Cerrar</button>
+      </div>
+      <div class="ai-body">
+        <div class="ai-grid">
+          <section class="ai-card">
+            <h4>Lectura rapida del contexto</h4>
+            <ul class="ai-list" id="ai-context-list"></ul>
+          </section>
+          <section class="ai-card">
+            <h4>Atajos utiles</h4>
+            <div class="ai-actions">
+              <button class="btn secondary" id="btn-ai-analyze">Analizar SQL actual</button>
+              <button class="btn secondary" id="btn-ai-error">Explicar ultimo error</button>
+              <button class="btn" id="btn-ai-example">Generar ejemplo</button>
+              <button class="btn primary" id="btn-ai-prompt">Copiar prompt IA</button>
+            </div>
+            <p class="ai-inline-note">Este modulo no llama a una API externa. Te da ayuda inmediata dentro del laboratorio y, si quieres, te deja un prompt rico en contexto para una IA externa.</p>
+          </section>
+        </div>
+
+        <section class="ai-output">
+          <div class="ai-output-header">
+            <strong id="ai-output-title">Asistente preparado</strong>
+            <span class="pill" id="ai-output-pill">Modo local</span>
+          </div>
+          <pre id="ai-output-text">Abre "Apoyo IA" y pulsa una accion. El sistema usara el SQL del editor, la practica activa y el esquema real de la base para orientarte.</pre>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <script>
     const STORAGE_PREFIX = "sql_nivel0_platform_v1";
     const COURSE_FILES = { reset: "scripts/00_reset_biblioteca_nivel0.sql" };
 
     const lessons = [
+      { id: "fundamentos", title: "Fundamentos - Que es una BBDD", type: "Guia", summary: "Tablas, filas, claves y como se conectan (muy visual).", description: "Entiende que es una base de datos y como se relacionan las tablas antes de escribir SQL.", doc: "Guia_Fundamentos_Base_de_Datos.md", script: null, sol: null, defaultTab: "doc" },
       { id: "intro", title: "Paso 00 - Preparar base", type: "Guia", summary: "Conexion, archivo .db y arranque de la biblioteca de practica.", description: "Prepara el entorno y deja la base lista antes de empezar.", doc: "README.md", script: "scripts/00_reset_biblioteca_nivel0.sql", sol: null, defaultTab: "doc" },
+      { id: "explorar", title: "Paso 00.5 - Ver y entender la BBDD", type: "Guia", summary: "Mira tablas, relaciones y rompe una clave foranea para entenderla.", description: "Aprende a inspeccionar la base de datos por dentro y a leer sus relaciones.", doc: "Guia_Ver_y_Entender_la_BBDD_en_VSCode.md", script: "scripts/00b_ver_y_entender_la_bbdd.sql", sol: "soluciones/00b_ver_y_entender_la_bbdd_resuelta.sql", defaultTab: "doc" },
       { id: "select", title: "Practica 01 - SELECT", type: "Practica", summary: "Primeras consultas para leer tablas y columnas.", description: "Pierde el miedo a SQL leyendo datos simples.", doc: null, script: "scripts/01_practica_select.sql", sol: "soluciones/01_practica_select_resuelta.sql", defaultTab: "script" },
       { id: "where", title: "Practica 02 - WHERE", type: "Practica", summary: "Filtra filas con condiciones, LIKE e IS NULL.", description: "Aprende a quedarte solo con los datos que interesan.", doc: null, script: "scripts/02_practica_where.sql", sol: "soluciones/02_practica_where_resuelta.sql", defaultTab: "script" },
       { id: "order", title: "Practica 03 - ORDER BY / LIMIT", type: "Practica", summary: "Ordena resultados y limita salidas.", description: "Controla el orden y el tamano del resultado.", doc: null, script: "scripts/03_practica_order_limit.sql", sol: "soluciones/03_practica_order_limit_resuelta.sql", defaultTab: "script" },
@@ -861,7 +1074,16 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
       currentTab: "doc",
       currentSourceText: "",
       currentSourcePath: "",
-      tableNames: []
+      tableNames: [],
+      schemaSnapshot: "",
+      lastExecution: {
+        sql: "",
+        error: "",
+        resultCount: 0,
+        rowCount: 0,
+        durationMs: 0,
+        mode: "editor"
+      }
     };
 
     const refs = {
@@ -885,6 +1107,11 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
       schemaModal: document.getElementById("schema-modal"),
       schemaBody: document.getElementById("mermaid-root"),
       helpModal: document.getElementById("help-modal"),
+      aiHelpModal: document.getElementById("ai-help-modal"),
+      aiContextList: document.getElementById("ai-context-list"),
+      aiOutputTitle: document.getElementById("ai-output-title"),
+      aiOutputPill: document.getElementById("ai-output-pill"),
+      aiOutputText: document.getElementById("ai-output-text"),
       statSocios: document.getElementById("stat-socios"),
       statLibros: document.getElementById("stat-libros"),
       statPrestamos: document.getElementById("stat-prestamos")
@@ -917,6 +1144,258 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
 
     function escapeHtml(value) {
       return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    }
+
+    function formatSqlPreview(sqlText) {
+      return (sqlText || "").trim() || "Sin SQL en el editor.";
+    }
+
+    function setAiOutput(title, text, pill = "Modo local") {
+      refs.aiOutputTitle.textContent = title;
+      refs.aiOutputPill.textContent = pill;
+      refs.aiOutputText.textContent = text;
+    }
+
+    function getSchemaSummary() {
+      if (!appState.db) return "Base no disponible todavia.";
+      const tables = runQuery("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name;")[0]?.values?.map((row) => row[0]) || [];
+      return tables.map((tableName) => {
+        const columns = runQuery(`PRAGMA table_info(${tableName});`)[0]?.values || [];
+        const cols = columns.map((col) => `${col[1]}:${(col[2] || "TEXT").split(" ")[0]}`).join(", ");
+        return `- ${tableName}: ${cols}`;
+      }).join("\n");
+    }
+
+    function updateAiContext() {
+      const lesson = lessons[appState.currentLessonIndex];
+      const rows = [
+        `Unidad activa: ${lesson.title}`,
+        `Pestana actual: ${appState.currentTab}`,
+        `Tablas disponibles: ${appState.tableNames.join(", ") || "sin datos"}`,
+        `Ultima ejecucion: ${appState.lastExecution.error ? "con error" : "sin error reciente"}`,
+        `Filas devueltas: ${appState.lastExecution.rowCount}`,
+        `Resultados abiertos: ${appState.lastExecution.resultCount}`
+      ];
+      refs.aiContextList.innerHTML = rows.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    }
+
+    function inferSqlTips(sqlText, errorMessage = "") {
+      const sql = (sqlText || "").trim();
+      const normalized = sql.toUpperCase();
+      const tips = [];
+
+      if (!sql) {
+        tips.push("Todavia no hay SQL en el editor. Escribe una consulta o carga un bloque del curso.");
+      }
+      if (normalized.includes("SELECT *") && !normalized.includes("LIMIT")) {
+        tips.push("Estas usando SELECT *. Para practica libre vale, pero para revisar resultados suele ayudar anadir LIMIT.");
+      }
+      if (normalized.includes("JOIN") && !normalized.includes(" ON ")) {
+        tips.push("Hay un JOIN sin ON visible. Revisa la condicion de union para evitar combinaciones incorrectas.");
+      }
+      if (normalized.includes("ORDER BY") && !normalized.includes("LIMIT")) {
+        tips.push("ORDER BY funciona mejor si acotas la salida con LIMIT cuando solo quieres inspeccionar.");
+      }
+      if (normalized.includes("GROUP BY") && !/(COUNT|SUM|AVG|MIN|MAX)\s*\(/.test(normalized)) {
+        tips.push("Hay GROUP BY pero no veo una funcion de agregacion clara. Comprueba si realmente quieres agrupar.");
+      }
+      if (/\b(DELETE|DROP|UPDATE)\b/.test(normalized)) {
+        tips.push("La consulta modifica datos. Si estas practicando, considera resetear la base cuando acabes.");
+      }
+      if (errorMessage) {
+        if (/syntax error/i.test(errorMessage)) tips.push("SQLite detecta un problema de sintaxis. Revisa comas, parentesis y el orden de clausulas.");
+        if (/no such table/i.test(errorMessage)) tips.push("La tabla no existe en esta base. Usa el esquema visual o las tarjetas superiores para confirmar nombres.");
+        if (/no such column/i.test(errorMessage)) tips.push("Hay una columna mal escrita o fuera de contexto. Revisa alias y nombres reales de la tabla.");
+        if (/ambiguous column name/i.test(errorMessage)) tips.push("Hay una columna ambigua. Cualificala con el alias o nombre de tabla.");
+      }
+      if (!tips.length) {
+        tips.push("La consulta tiene buena pinta para esta base. Si quieres mas ayuda, genera el prompt IA con el contexto completo.");
+      }
+      return tips;
+    }
+
+    function levenshteinDistance(a, b) {
+      const source = a.toLowerCase();
+      const target = b.toLowerCase();
+      const matrix = Array.from({ length: source.length + 1 }, (_, row) =>
+        Array.from({ length: target.length + 1 }, (_, col) => (row === 0 ? col : col === 0 ? row : 0))
+      );
+      for (let row = 1; row <= source.length; row++) {
+        for (let col = 1; col <= target.length; col++) {
+          const cost = source[row - 1] === target[col - 1] ? 0 : 1;
+          matrix[row][col] = Math.min(
+            matrix[row - 1][col] + 1,
+            matrix[row][col - 1] + 1,
+            matrix[row - 1][col - 1] + cost
+          );
+        }
+      }
+      return matrix[source.length][target.length];
+    }
+
+    function suggestClosestItems(input, candidates, maxSuggestions = 3) {
+      const value = (input || "").trim().toLowerCase();
+      if (!value || !Array.isArray(candidates)) return [];
+      return candidates
+        .map((candidate) => {
+          const score = candidate.toLowerCase().includes(value) || value.includes(candidate.toLowerCase())
+            ? 0
+            : levenshteinDistance(value, candidate);
+          return { candidate, score };
+        })
+        .sort((left, right) => left.score - right.score)
+        .filter((item, index) => index < maxSuggestions && item.score <= Math.max(3, Math.floor(item.candidate.length / 2)))
+        .map((item) => item.candidate);
+    }
+
+    function getAllColumnNames() {
+      if (!appState.db || !appState.tableNames.length) return [];
+      return appState.tableNames.flatMap((tableName) => {
+        const columns = runQuery(`PRAGMA table_info(${tableName});`)[0]?.values || [];
+        return columns.map((col) => col[1]);
+      });
+    }
+
+    function buildErrorDetails(errorMessage, sqlText) {
+      const tips = inferSqlTips(sqlText, errorMessage);
+      const details = {
+        summary: "SQLite no ha podido ejecutar la consulta.",
+        hints: [...tips],
+        matches: []
+      };
+
+      const tableMatch = errorMessage.match(/no such table:\s*([^\s;]+)/i);
+      if (tableMatch) {
+        const missingTable = tableMatch[1].replace(/["'`]/g, "");
+        const similarTables = suggestClosestItems(missingTable, appState.tableNames);
+        details.summary = `La tabla \`${missingTable}\` no existe en la base cargada.`;
+        if (similarTables.length) {
+          details.matches.push(`Quizá querías escribir: ${similarTables.map((item) => `\`${item}\``).join(", ")}.`);
+        }
+      }
+
+      const columnMatch = errorMessage.match(/no such column:\s*([^\s;]+)/i);
+      if (columnMatch) {
+        const missingColumn = columnMatch[1].replace(/["'`]/g, "");
+        const similarColumns = suggestClosestItems(missingColumn, getAllColumnNames());
+        details.summary = `La columna \`${missingColumn}\` no existe o no está accesible en ese contexto.`;
+        if (similarColumns.length) {
+          details.matches.push(`Columnas parecidas detectadas: ${similarColumns.map((item) => `\`${item}\``).join(", ")}.`);
+        }
+      }
+
+      if (/syntax error/i.test(errorMessage)) {
+        details.summary = "Hay un error de sintaxis en la consulta.";
+        details.matches.push("Revisa especialmente comas, paréntesis, alias y el orden `SELECT -> FROM -> WHERE -> GROUP BY -> ORDER BY -> LIMIT`.");
+      }
+
+      if (/ambiguous column name/i.test(errorMessage)) {
+        details.summary = "Hay una columna ambigua en una consulta con varias tablas.";
+        details.matches.push("Usa prefijos como `socios.nombre` o alias como `s.nombre`.");
+      }
+
+      return details;
+    }
+
+    function renderExecutionSummary(sourceSql, meta = {}) {
+      const wrapper = document.createElement("section");
+      wrapper.className = "execution-card";
+      const modeLabel = meta.mode === "selection" ? "Selección" : "Editor completo";
+      wrapper.innerHTML = `
+        <div class="execution-card-header">
+          <strong>Consulta ejecutada</strong>
+          <div class="execution-meta">
+            <span class="meta-badge">${modeLabel}</span>
+            ${typeof meta.durationMs === "number" ? `<span class="meta-badge">${meta.durationMs} ms</span>` : ""}
+            ${typeof meta.resultCount === "number" ? `<span class="meta-badge">${meta.resultCount} bloque(s)</span>` : ""}
+            ${typeof meta.rowCount === "number" ? `<span class="meta-badge">${meta.rowCount} fila(s)</span>` : ""}
+          </div>
+        </div>
+        <pre class="execution-sql">${escapeHtml(sourceSql)}</pre>
+      `;
+      refs.resultsBody.appendChild(wrapper);
+    }
+
+    function renderDiagnosticPanel(kind, title, summary, items = [], extraLines = []) {
+      const section = document.createElement("section");
+      section.className = `diagnostic-card${kind === "success" ? " successish" : ""}`;
+      const listMarkup = items.length
+        ? `<ul class="diagnostic-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+        : "";
+      const extraMarkup = extraLines.length
+        ? `<ul class="diagnostic-list">${extraLines.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ul>`
+        : "";
+      section.innerHTML = `
+        <div class="diagnostic-header">
+          <strong>${kind === "error" ? "Diagnóstico" : "Estado de ejecución"}</strong>
+        </div>
+        <div class="diagnostic-body">
+          <h4 class="diagnostic-title">${escapeHtml(title)}</h4>
+          <p class="diagnostic-text">${escapeHtml(summary)}</p>
+          ${listMarkup}
+          ${extraMarkup}
+        </div>
+      `;
+      refs.resultsBody.appendChild(section);
+    }
+
+    function buildLessonExampleSql() {
+      const lessonId = lessons[appState.currentLessonIndex]?.id;
+      const examples = {
+        intro: "SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name;",
+        select: "SELECT id_libro, titulo, genero\nFROM libros\nLIMIT 10;",
+        where: "SELECT nombre, email\nFROM socios\nWHERE email LIKE '%@gmail.com';",
+        order: "SELECT titulo, anio_publicacion\nFROM libros\nORDER BY anio_publicacion DESC\nLIMIT 5;",
+        create: "CREATE TABLE reseñas_demo (\n  id_resena INTEGER PRIMARY KEY,\n  libro_id INTEGER,\n  puntuacion INTEGER\n);\n\nINSERT INTO reseñas_demo (libro_id, puntuacion)\nVALUES (1, 5), (2, 4);\n\nSELECT * FROM reseñas_demo;",
+        join: "SELECT s.nombre, l.titulo, p.fecha_prestamo\nFROM prestamos p\nJOIN socios s ON s.id_socio = p.id_socio\nJOIN libros l ON l.id_libro = p.id_libro\nLIMIT 10;",
+        group: "SELECT l.genero, COUNT(*) AS total_libros\nFROM libros l\nGROUP BY l.genero\nORDER BY total_libros DESC;",
+        final: "SELECT s.nombre, COUNT(*) AS prestamos_realizados\nFROM prestamos p\nJOIN socios s ON s.id_socio = p.id_socio\nGROUP BY s.id_socio, s.nombre\nORDER BY prestamos_realizados DESC\nLIMIT 5;"
+      };
+      return examples[lessonId] || "SELECT * FROM libros LIMIT 10;";
+    }
+
+    function buildAiPrompt() {
+      const lesson = lessons[appState.currentLessonIndex];
+      const sqlText = formatSqlPreview(refs.sqlEditor.value);
+      const errorBlock = appState.lastExecution.error || "Sin error reciente.";
+      const resultSummary = `Resultados: ${appState.lastExecution.resultCount} bloque(s), ${appState.lastExecution.rowCount} fila(s) visibles.`;
+      return [
+        "Actua como un profesor de SQL para principiantes.",
+        "Quiero que revises mi consulta y me respondas en espanol claro, corto y didactico.",
+        "",
+        `Unidad activa: ${lesson.title}`,
+        `Objetivo de la unidad: ${lesson.description}`,
+        `Pestana actual: ${appState.currentTab}`,
+        "",
+        "Esquema real de la base:",
+        appState.schemaSnapshot || getSchemaSummary(),
+        "",
+        "SQL del alumno:",
+        sqlText,
+        "",
+        `Ultimo error: ${errorBlock}`,
+        resultSummary,
+        "",
+        "Necesito:",
+        "1. Detectar si la consulta esta bien o mal.",
+        "2. Explicar el error si lo hay.",
+        "3. Proponer una version corregida.",
+        "4. Explicar por que esa version corregida funciona."
+      ].join("\n");
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+      const ghost = document.createElement("textarea");
+      ghost.value = text;
+      document.body.appendChild(ghost);
+      ghost.select();
+      document.execCommand("copy");
+      document.body.removeChild(ghost);
+      return true;
     }
 
     function renderLessonList() {
@@ -979,6 +1458,7 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
 
       renderLessonList();
       renderTabs(lesson, availableTabs);
+      updateAiContext();
       await renderCurrentTab();
     }
 
@@ -1075,7 +1555,10 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
     }
 
     async function refreshRuntimeViews() {
+      appState.tableNames = runQuery("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name;")[0]?.values?.map((row) => row[0]) || [];
+      appState.schemaSnapshot = getSchemaSummary();
       updateStats();
+      updateAiContext();
     }
 
     function runQuery(sqlText) {
@@ -1096,13 +1579,20 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
         renderMessage("No hay SQL para ejecutar.", "info");
         return;
       }
+      const startedAt = performance.now();
       try {
         const results = runQuery(sqlText);
-        renderResults(results, sqlText);
+        const durationMs = Math.max(1, Math.round(performance.now() - startedAt));
+        const rowCount = results.reduce((total, result) => total + result.values.length, 0);
+        appState.lastExecution = { sql: sqlText, error: "", resultCount: results.length, rowCount, durationMs, mode: runSelectionOnly ? "selection" : "editor" };
+        renderResults(results, sqlText, appState.lastExecution);
         refs.editorStatus.textContent = runSelectionOnly ? "Se ha ejecutado la seleccion actual." : "Se ha ejecutado el contenido del editor.";
         refreshRuntimeViews();
       } catch (error) {
-        renderMessage(`Error SQL:\n${error.message}`, "error", true);
+        const durationMs = Math.max(1, Math.round(performance.now() - startedAt));
+        appState.lastExecution = { sql: sqlText, error: error.message, resultCount: 0, rowCount: 0, durationMs, mode: runSelectionOnly ? "selection" : "editor" };
+        renderErrorResults(error.message, sqlText, appState.lastExecution);
+        updateAiContext();
       }
     }
 
@@ -1112,25 +1602,50 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
       else refs.resultsBody.insertAdjacentHTML("afterbegin", block);
     }
 
-    function renderResults(results, sourceSql) {
+    function renderErrorResults(errorMessage, sourceSql, meta = {}) {
       refs.resultsBody.innerHTML = "";
-      const sourceBlock = document.createElement("div");
-      sourceBlock.className = "message info";
-      sourceBlock.innerHTML = `<strong>SQL ejecutado</strong><br><code>${escapeHtml(sourceSql)}</code>`;
-      refs.resultsBody.appendChild(sourceBlock);
+      renderExecutionSummary(sourceSql, meta);
+      const details = buildErrorDetails(errorMessage, sourceSql);
+      renderDiagnosticPanel(
+        "error",
+        `Error SQL: ${errorMessage}`,
+        details.summary,
+        details.hints,
+        details.matches
+      );
+    }
+
+    function renderResults(results, sourceSql, meta = {}) {
+      refs.resultsBody.innerHTML = "";
+      renderExecutionSummary(sourceSql, meta);
 
       if (!results || results.length === 0) {
-        const ok = document.createElement("div");
-        ok.className = "message success";
-        ok.textContent = "Sentencia ejecutada correctamente. No ha devuelto filas para mostrar.";
-        refs.resultsBody.appendChild(ok);
+        renderDiagnosticPanel(
+          "success",
+          "Ejecución correcta",
+          "La sentencia se ha ejecutado bien, pero no ha devuelto filas para mostrar.",
+          [
+            "Esto es normal en consultas como CREATE, INSERT, UPDATE o DELETE.",
+            "Si esperabas una tabla de salida, revisa si te falta un SELECT al final."
+          ]
+        );
         return;
       }
+
+      renderDiagnosticPanel(
+        "success",
+        "Consulta completada",
+        "La consulta se ha ejecutado correctamente y el resultado ya está renderizado debajo.",
+        [
+          `Bloques devueltos: ${results.length}.`,
+          `Filas visibles en pantalla: ${results.reduce((total, result) => total + result.values.length, 0)}.`
+        ]
+      );
 
       results.forEach((result, index) => {
         const wrapper = document.createElement("section");
         wrapper.className = "result-card";
-        wrapper.innerHTML = `<h4>Resultado ${index + 1} - ${result.values.length} fila(s)</h4>`;
+        wrapper.innerHTML = `<h4>Resultado ${index + 1} - ${result.values.length} fila(s) - ${result.columns.length} columna(s)</h4>`;
         const table = document.createElement("table");
         const thead = document.createElement("thead");
         const headerRow = document.createElement("tr");
@@ -1193,7 +1708,7 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
           const modifiers = [];
           if (col[5] === 1) modifiers.push("PK");
           if (fkMap.has(col[1])) modifiers.push("FK");
-          diagram += `        ${type} ${col[1]} ${modifiers.length ? `"${modifiers.join(",")}"` : ""}\n`;
+          diagram += `        ${type} ${col[1]}${modifiers.length ? ` ${modifiers.join(",")}` : ""}\n`;
         });
         diagram += "    }\n";
       });
@@ -1208,6 +1723,82 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
       } catch (error) {
         refs.schemaBody.innerHTML = `<div class="message error">${escapeHtml(error.message)}</div>`;
         refs.schemaModal.style.display = "flex";
+      }
+    }
+
+    function openAiHelp() {
+      updateAiContext();
+      setAiOutput(
+        "Asistente preparado",
+        [
+          "Este apoyo IA trabaja en dos capas:",
+          "",
+          "1. Analisis local",
+          "- Detecta patrones flojos en tu SQL.",
+          "- Interpreta errores frecuentes de SQLite.",
+          "- Sugiere el siguiente paso mas util para la practica activa.",
+          "",
+          "2. Prompt enriquecido",
+          "- Si quieres ayuda externa, te copia un prompt con unidad, esquema, SQL y error real.",
+          "",
+          "Pulsa una accion para empezar."
+        ].join("\n")
+      );
+      refs.aiHelpModal.style.display = "flex";
+    }
+
+    function showAiAnalysis() {
+      const sqlText = refs.sqlEditor.value;
+      const tips = inferSqlTips(sqlText, appState.lastExecution.error);
+      const lesson = lessons[appState.currentLessonIndex];
+      const text = [
+        `Unidad: ${lesson.title}`,
+        `SQL revisado:`,
+        formatSqlPreview(sqlText),
+        "",
+        "Lectura rapida:",
+        ...tips.map((tip, index) => `${index + 1}. ${tip}`)
+      ].join("\n");
+      setAiOutput("Analisis del SQL actual", text, "Diagnostico");
+    }
+
+    function showAiErrorHelp() {
+      const errorMessage = appState.lastExecution.error;
+      if (!errorMessage) {
+        setAiOutput("Ultimo error", "No hay un error reciente guardado. Ejecuta una consulta con fallo o usa el analisis del SQL actual.", "Sin error");
+        return;
+      }
+      const tips = inferSqlTips(appState.lastExecution.sql, errorMessage);
+      const text = [
+        `Error detectado: ${errorMessage}`,
+        "",
+        "Posibles causas y correcciones:",
+        ...tips.map((tip, index) => `${index + 1}. ${tip}`),
+        "",
+        "SQL que produjo el error:",
+        formatSqlPreview(appState.lastExecution.sql)
+      ].join("\n");
+      setAiOutput("Explicacion del ultimo error", text, "Debug SQL");
+    }
+
+    function insertLessonExample() {
+      const exampleSql = buildLessonExampleSql();
+      refs.sqlEditor.value = exampleSql;
+      refs.sqlEditor.focus();
+      saveDraft();
+      refs.editorStatus.textContent = "Ejemplo guiado cargado para la unidad actual.";
+      setAiOutput("Ejemplo generado", exampleSql, "Ejemplo");
+    }
+
+    async function copyAiPrompt() {
+      const prompt = buildAiPrompt();
+      try {
+        await copyText(prompt);
+        setAiOutput("Prompt IA copiado", prompt, "Copiado");
+        refs.editorStatus.textContent = "Prompt IA copiado al portapapeles.";
+      } catch (error) {
+        setAiOutput("Prompt IA generado", prompt, "Manual");
+        renderMessage(`No se pudo copiar el prompt automaticamente.\n${error.message}`, "error", false);
       }
     }
 
@@ -1331,6 +1922,11 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
       refs.editorStatus.textContent = "Editor limpiado.";
     });
     document.getElementById("btn-load-snippet").addEventListener("click", appendSourceToEditor);
+    document.getElementById("btn-open-ai-help").addEventListener("click", openAiHelp);
+    document.getElementById("btn-ai-analyze").addEventListener("click", showAiAnalysis);
+    document.getElementById("btn-ai-error").addEventListener("click", showAiErrorHelp);
+    document.getElementById("btn-ai-example").addEventListener("click", insertLessonExample);
+    document.getElementById("btn-ai-prompt").addEventListener("click", copyAiPrompt);
     document.getElementById("btn-open-help").addEventListener("click", () => {
       refs.helpModal.style.display = "flex";
     });
@@ -1362,11 +1958,15 @@ Puedes seleccionar una sola sentencia y pulsar Ejecutar seleccion."></textarea>
     document.getElementById("btn-restore-lab").addEventListener("click", () => applyLabState(false));
     document.getElementById("btn-close-schema").addEventListener("click", () => { refs.schemaModal.style.display = "none"; });
     document.getElementById("btn-close-help").addEventListener("click", () => { refs.helpModal.style.display = "none"; });
+    document.getElementById("btn-close-ai-help").addEventListener("click", () => { refs.aiHelpModal.style.display = "none"; });
     refs.schemaModal.addEventListener("click", (event) => {
       if (event.target === refs.schemaModal) refs.schemaModal.style.display = "none";
     });
     refs.helpModal.addEventListener("click", (event) => {
       if (event.target === refs.helpModal) refs.helpModal.style.display = "none";
+    });
+    refs.aiHelpModal.addEventListener("click", (event) => {
+      if (event.target === refs.aiHelpModal) refs.aiHelpModal.style.display = "none";
     });
     document.addEventListener("fullscreenchange", syncFullscreenButton);
     document.querySelectorAll(".status-card[data-table]").forEach((card) => {

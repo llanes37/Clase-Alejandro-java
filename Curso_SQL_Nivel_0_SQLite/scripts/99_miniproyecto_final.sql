@@ -11,20 +11,12 @@
 DROP TABLE IF EXISTS ordenadores;
 
 -- TODO: 1) Muestra todos los libros con titulo y genero.
--- * Plantilla:
--- SELECT titulo, genero FROM libros;
 
 -- TODO: 2) Muestra los socios de Madrid.
--- * Plantilla:
--- SELECT nombre, ciudad FROM socios WHERE ciudad = 'Madrid';
 
 -- TODO: 3) Muestra los 2 libros mas largos.
--- * Plantilla:
--- SELECT titulo, paginas FROM libros ORDER BY paginas DESC LIMIT 2;
 
 -- TODO: 4) Muestra los socios sin telefono.
--- * Plantilla:
--- SELECT nombre, telefono FROM socios WHERE telefono IS NULL;
 
 -- TODO: 5) Muestra los prestamos no devueltos con nombre del socio.
 -- * Pista: JOIN con socios.
@@ -33,12 +25,8 @@ DROP TABLE IF EXISTS ordenadores;
 -- * Pista: JOIN con socios y libros.
 
 -- TODO: 7) Cuenta cuantos socios hay en total.
--- * Plantilla:
--- SELECT COUNT(*) AS total_socios FROM socios;
 
 -- TODO: 8) Cuenta cuantos libros hay por genero.
--- * Plantilla:
--- SELECT genero, COUNT(*) AS total FROM libros GROUP BY genero;
 
 -- TODO: 9) Crea una tabla llamada ordenadores con:
 -- TODO: ordenador_id, aula, operativo
@@ -46,3 +34,4 @@ DROP TABLE IF EXISTS ordenadores;
 -- TODO: 10) Inserta 3 ordenadores y consultalos.
 
 -- * Si completas esto sin copiar todo, ya no estas en nivel cero total.
+-- * Cuando termines, abre la pestana "Solucion" para comprobar.
